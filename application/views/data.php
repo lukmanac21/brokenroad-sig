@@ -41,9 +41,9 @@
                 <tbody>
                   <td> <?php echo $i ; ?></td>
                   <td><?php echo $resultMaps->nama_wilayah; ?></td>
-                  <td><?php echo $resultMaps->arus_jalan; ?></td>
-                  <td><?php echo $resultMaps->kondisi_jalan; ?></td>
-                  <td><?php echo $resultMaps->keramaian_jalan; ?></td>
+                  <td><?php echo $resultMaps->nama_arus; ?></td>
+                  <td><?php echo $resultMaps->nama_jalan; ?></td>
+                  <td><?php echo $resultMaps->nama_keramaian; ?></td>
                   <td><?php echo $resultMaps->panjang_lubang; ?></td>
                   <td><?php echo $resultMaps->lebar_lubang; ?></td> 
                   <td class="text-right">
@@ -52,22 +52,52 @@
                           <i class="fas fa-ellipsis-v"></i>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                          <a class="dropdown-item" href="<?php echo site_url('Data/editdata/')?><?php echo $resultMaps->id_maps?>">Edit</a>
-                          <a class="dropdown-item" href="#">Delete</a>
+                          <a class="dropdown-item" href="<?php echo site_url('Data/editdata/')?><?php echo $resultMaps->id_maps; ?>">Edit</a>
+                          <a class="dropdown-item" data-toggle="modal" data-target="#delete<?php echo $resultMaps->id_maps; ?>" class="btn btn-primary btn-sm">Delete</a>
                         </div>
                       </div>
                     </td>
                 </tbody>
-                <?php $i++; } ?>
+                <?php } ?>
               </table>
             </div>
           </div>
         </div>
       </div>
-      <!-- Dark table -->
-      <!-- Footer -->
-    </div>
-    </div>
+      <?php 
+      foreach ($maps as $resultMaps) 
+      { ?>
+      <div class="modal fade" id="delete<?php echo $resultMaps->id_maps;?>">
+        <div class="modal-dialog">
+          <form class="form-horizontal" action="<?php echo site_url('Data/deleteData');?>" method="post">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title">Hapus Data</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                  <div class="card-body">
+                  <div class="form-group row">
+                    <div class="col-sm-8">
+                      <h3>Apakah anda yakin menghapus data ke <?php echo $resultMaps->id_maps ; ?> ?</h3>
+                      <input type="hidden" value="<?php echo $resultMaps->id_maps ; ?>" name="id" class="form-control">
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
+                <button type="submit" name="submit" class="btn btn-primary">Hapus</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      <?php } ?>
+  </div>
+</div>
 </body>
 <?php $this->load->view('_partials/js.php');?>
 </html>

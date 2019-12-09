@@ -26,10 +26,10 @@
                                 <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="ni ni-box-2"></i></span>
                                 </div>
-                                <select name="wilayah" class="form-control">
+                                <select name="id_wilayah" class="form-control">
                                     <option value="">--Pilih Wilayah--</option>
                                     <?php foreach ($wilayah as $rowWilayah) {?>
-                                        <option value="<?php echo $rowWilayah->nama_wilayah; ?>"><?php echo $rowWilayah->nama_wilayah; ?></option>
+                                        <option value="<?php echo $rowWilayah->id_wilayah; ?>"><?php echo $rowWilayah->nama_wilayah; ?></option>
                                     <?php }?>
                                 </select>
                             </div>
@@ -41,10 +41,10 @@
                                 <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="ni ni-ui-04"></i></span>
                                 </div>
-                                <select name="arus" class="form-control">
+                                <select name="id_arus" class="form-control">
                                     <option value="">--Pilih Arus--</option>
                                     <?php foreach ($arus as $rowArus) {?>
-                                        <option value="<?php echo $rowArus->nama_arus; ?>"><?php echo $rowArus->nama_arus; ?></option>
+                                        <option value="<?php echo $rowArus->id_arus; ?>"><?php echo $rowArus->nama_arus; ?></option>
                                     <?php }?>
                                 </select>
                             </div>
@@ -58,10 +58,10 @@
                                 <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="ni ni-vector"></i></span>
                                 </div>
-                                <select name="kondisi"class="form-control">
+                                <select name="id_jalan"class="form-control">
                                     <option value="">--Pilih Kondisi Jalan--</option>
                                     <?php foreach ($jalan as $rowJalan) {?>
-                                        <option value="<?php echo $rowJalan->nama_jalan; ?>"><?php echo $rowJalan->nama_jalan; ?></option>
+                                        <option value="<?php echo $rowJalan->id_jalan; ?>"><?php echo $rowJalan->nama_jalan; ?></option>
                                     <?php }?>
                                 </select>
                             </div>
@@ -73,10 +73,10 @@
                                 <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="ni ni-sound-wave"></i></span>
                                 </div>
-                                <select name="keramaian" class="form-control">
+                                <select name="id_keramaian" class="form-control">
                                     <option value="">--Pilih Tingkat Keramaian--</option>
                                     <?php foreach ($keramaian as $rowKeramaian) {?>
-                                        <option value="<?php echo $rowKeramaian->nama_keramaian; ?>"><?php echo $rowKeramaian->nama_keramaian; ?></option>
+                                        <option value="<?php echo $rowKeramaian->id_keramaian; ?>"><?php echo $rowKeramaian->nama_keramaian; ?></option>
                                     <?php }?>
                                 </select>
                             </div>

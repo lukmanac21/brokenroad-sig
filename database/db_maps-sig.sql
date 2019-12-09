@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 09, 2019 at 10:47 AM
+-- Generation Time: Dec 09, 2019 at 12:44 PM
 -- Server version: 10.3.16-MariaDB
 -- PHP Version: 7.3.6
 
@@ -109,10 +109,10 @@ INSERT INTO `tbl_keramaian` (`id_keramaian`, `nama_keramaian`) VALUES
 
 CREATE TABLE `tbl_maps` (
   `id_maps` int(11) NOT NULL,
-  `nama_wilayah` varchar(50) NOT NULL,
-  `arus_jalan` varchar(50) NOT NULL,
-  `kondisi_jalan` varchar(50) NOT NULL,
-  `keramaian_jalan` varchar(50) NOT NULL,
+  `id_wilayah` int(11) NOT NULL,
+  `id_arus` int(11) NOT NULL,
+  `id_jalan` int(11) NOT NULL,
+  `id_keramaian` int(11) NOT NULL,
   `panjang_lubang` varchar(50) NOT NULL,
   `lebar_lubang` varchar(50) NOT NULL,
   `lattitude` varchar(100) NOT NULL,
@@ -123,8 +123,10 @@ CREATE TABLE `tbl_maps` (
 -- Dumping data for table `tbl_maps`
 --
 
-INSERT INTO `tbl_maps` (`id_maps`, `nama_wilayah`, `arus_jalan`, `kondisi_jalan`, `keramaian_jalan`, `panjang_lubang`, `lebar_lubang`, `lattitude`, `longitude`) VALUES
-(1, 'Belimbing', 'Satu Arah', 'Aspal', 'Keramaian Rendah', '90 Cm', '30 Cm', '-6.161432', '106.737876');
+INSERT INTO `tbl_maps` (`id_maps`, `id_wilayah`, `id_arus`, `id_jalan`, `id_keramaian`, `panjang_lubang`, `lebar_lubang`, `lattitude`, `longitude`) VALUES
+(1, 1, 1, 1, 2, '90 Cm', '30 Cm', '-6.161432', '106.737876'),
+(2, 1, 1, 2, 1, '90 Cm', '30 Cm', '-6.161833', '106.737976'),
+(3, 1, 1, 2, 1, '90 Cm', '35 Cm', '-6.161833', '106.737976');
 
 -- --------------------------------------------------------
 
@@ -220,7 +222,7 @@ ALTER TABLE `tbl_keramaian`
 -- AUTO_INCREMENT for table `tbl_maps`
 --
 ALTER TABLE `tbl_maps`
-  MODIFY `id_maps` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_maps` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `tbl_wilayah`

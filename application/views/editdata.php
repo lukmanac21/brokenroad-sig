@@ -19,7 +19,7 @@
               <br>
             </div>
             <?php foreach($data as $rowMaps){?>
-            <form role="form" action="<?php echo site_url('Data/inputdata');?>" method="post">
+            <form role="form" action="<?php echo site_url('Data/updateData');?>" method="post">
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
@@ -27,12 +27,13 @@
                                 <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="ni ni-box-2"></i></span>
                                 </div>
-                                <select name="wilayah" class="form-control">
+                                <select name="id_wilayah" class="form-control">
                                     <option value="">--Pilih Wilayah--</option>
                                     <?php foreach ($wilayah as $rowWilayah) {?>
-                                        <option value="<?php echo $rowWilayah->nama_wilayah; ?>"><?php echo $rowWilayah->nama_wilayah; ?></option>
+                                        <option value="<?php echo $rowWilayah->id_wilayah?>"<?php if($rowMaps->id_wilayah == $rowWilayah->id_wilayah) echo 'selected="selected"';?>><?php echo $rowWilayah->nama_wilayah;?></option>
                                     <?php }?>
                                 </select>
+                                <input type="hidden" value="<?php echo $rowMaps->id_maps ; ?>" name="id" class="form-control">
                             </div>
                         </div>
                     </div>
@@ -42,10 +43,10 @@
                                 <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="ni ni-ui-04"></i></span>
                                 </div>
-                                <select name="arus" class="form-control">
+                                <select name="id_arus" class="form-control">
                                     <option value="">--Pilih Arus--</option>
                                     <?php foreach ($arus as $rowArus) {?>
-                                        <option value="<?php echo $rowArus->nama_arus; ?>"><?php echo $rowArus->nama_arus; ?></option>
+                                        <option value="<?php echo $rowArus->id_arus?>"<?php if($rowMaps->id_arus == $rowArus->id_arus) echo 'selected="selected"';?>><?php echo $rowArus->nama_arus;?></option>
                                     <?php }?>
                                 </select>
                             </div>
@@ -59,10 +60,10 @@
                                 <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="ni ni-vector"></i></span>
                                 </div>
-                                <select name="kondisi"class="form-control">
+                                <select name="id_jalan"class="form-control">
                                     <option value="">--Pilih Kondisi Jalan--</option>
-                                    <?php foreach ($jalan as $rowJalan) {?>
-                                        <option value="<?php echo $rowJalan->nama_jalan; ?>"><?php echo $rowJalan->nama_jalan; ?></option>
+                                    <?php foreach ($jalan as $rowJal) {?>
+                                        <option value="<?php echo $rowJal->id_jalan?>"<?php if($rowMaps->id_jalan == $rowJal->id_jalan) echo 'selected="selected"';?>><?php echo $rowJal->nama_jalan;?></option>
                                     <?php }?>
                                 </select>
                             </div>
@@ -74,10 +75,10 @@
                                 <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="ni ni-sound-wave"></i></span>
                                 </div>
-                                <select name="keramaian" class="form-control">
-                                    <option value="">--Pilih Tingkat Keramaian--</option>
-                                    <?php foreach ($keramaian as $rowKeramaian) {?>
-                                        <option value="<?php echo $rowKeramaian->nama_keramaian; ?>"><?php echo $rowKeramaian->nama_keramaian; ?></option>
+                                <select name="id_keramaian" class="form-control">
+                                <option value="">--Pilih Keramaian--</option>
+                                    <?php foreach($keramaian as $rowKe){?>
+                                        <option value="<?php echo $rowKe->id_keramaian?>"<?php if($rowMaps->id_keramaian == $rowKe->id_keramaian) echo 'selected="selected"';?>><?php echo $rowKe->nama_keramaian;?></option>
                                     <?php }?>
                                 </select>
                             </div>
@@ -129,7 +130,7 @@
                     </div>
                 </div>
                 <div class="text-center">
-                  <button type="submit" class="btn btn-primary mt-4">Tambah Data</button>
+                  <button type="submit" class="btn btn-primary mt-4">Ubah Data</button>
                 </div>
               </form>
                                     <?php }?>

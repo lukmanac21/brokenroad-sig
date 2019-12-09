@@ -9,7 +9,7 @@ class Data extends CI_Controller {
     }
 	public function index()
 	{
-		$result['maps'] = $this->mFunc->showData('tbl_maps');
+		$result['maps'] = $this->mFunc->showDataMap();
 		$this->load->view('data',$result);
 	}
 	public function createdata(){
@@ -20,20 +20,20 @@ class Data extends CI_Controller {
 		$this->load->view('inputdata', $result);
 	}
 	public function inputdata(){
-		$wilayah = $this->input->post('wilayah');
-		$arus = $this->input->post('arus');
-		$kondisi = $this->input->post('kondisi');
-		$keramaian = $this->input->post('keramaian');
+		$id_wilayah = $this->input->post('id_wilayah');
+		$id_arus = $this->input->post('id_arus');
+		$id_jalan = $this->input->post('id_jalan');
+		$id_keramaian = $this->input->post('id_keramaian');
 		$panjang = $this->input->post('panjang');
 		$lebar = $this->input->post('lebar');
 		$lat = $this->input->post('lat');
 		$long = $this->input->post('long');
 
 		$data = array(
-			'nama_wilayah' => $wilayah,
-			'arus_jalan' => $arus,
-			'kondisi_jalan' => $kondisi,
-			'keramaian_jalan' => $keramaian,
+			'id_wilayah' => $id_wilayah,
+			'id_arus' => $id_arus,
+			'id_jalan' => $id_jalan,
+			'id_keramaian' => $id_keramaian,
 			'panjang_lubang' => $panjang,
 			'lebar_lubang' => $lebar,
 			'lattitude' => $lat,
@@ -47,11 +47,46 @@ class Data extends CI_Controller {
 		$where = array(
 			'id_maps' => $id
 		);
+		$result['data'] = $this->mFunc->showDataMaps('tbl_maps',$where);
 		$result['arus'] = $this->mFunc->showData('tbl_arus');
-		$result['wilayah'] = $this->mFunc->showData('tbl_wilayah');
 		$result['jalan'] = $this->mFunc->showData('tbl_jalan');
+		$result['wilayah'] = $this->mFunc->showData('tbl_wilayah');
 		$result['keramaian'] = $this->mFunc->showData('tbl_keramaian');
-		$result['data'] = $this->mFunc->editData('tbl_maps',$where);
 		$this->load->view('editdata', $result);
+	}
+	public function updatedata(){
+		$id = $this->input->post('id');
+		$where = array(
+			'id_maps' => $id
+		);
+		$id_wilayah = $this->input->post('id_wilayah');
+		$id_arus = $this->input->post('id_arus');
+		$id_jalan = $this->input->post('id_jalan');
+		$id_keramaian = $this->input->post('id_keramaian');
+		$panjang = $this->input->post('panjang');
+		$lebar = $this->input->post('lebar');
+		$lat = $this->input->post('lat');
+		$long = $this->input->post('long');
+
+		$data = array(
+			'id_wilayah' => $id_wilayah,
+			'id_arus' => $id_arus,
+			'id_jalan' => $id_jalan,
+			'id_keramaian' => $id_keramaian,
+			'panjang_lubang' => $panjang,
+			'lebar_lubang' => $lebar,
+			'lattitude' => $lat,
+			'longitude' => $long,
+		);
+		$this->mFunc->updateData('tbl_maps',$data, $where);
+		redirect('Data/index');
+	}
+	public function deleteData(){
+		$id = $this->input->post('id');
+		$where = array(
+			'id_maps' => $id
+		);
+		$this->mFunc->deleteData('tbl_maps', $where);
+		redirect('Data/index');
 	}
 }
