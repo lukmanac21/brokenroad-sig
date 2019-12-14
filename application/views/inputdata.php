@@ -16,9 +16,12 @@
           <div class="card shadow">
             <div class="card-header border-0">
               <h3 class="mb-0">Data Jalan</h3>
+              <hr>
+              <h4 class="mb-0"> Data Detail Kerusakan </h4>
               <br>
             </div>
             <form role="form" action="<?php echo site_url('Data/inputdata');?>" method="post">
+            <div style="margin-left: 15px ; margin-right: 15px ;">
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
@@ -26,7 +29,7 @@
                                 <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="ni ni-box-2"></i></span>
                                 </div>
-                                <select name="id_wilayah" class="form-control">
+                                <select name="id_wilayah" class="form-control id_wilayah">
                                     <option value="">--Pilih Wilayah--</option>
                                     <?php foreach ($wilayah as $rowWilayah) {?>
                                         <option value="<?php echo $rowWilayah->id_wilayah; ?>"><?php echo $rowWilayah->nama_wilayah; ?></option>
@@ -58,12 +61,13 @@
                                 <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="ni ni-vector"></i></span>
                                 </div>
-                                <select name="id_jalan"class="form-control">
-                                    <option value="">--Pilih Kondisi Jalan--</option>
+                                <select name="id_jalan" class="form-control id_jalan2">
+                                    <option value="">--Pilih Nama Jalan--</option>
                                     <?php foreach ($jalan as $rowJalan) {?>
                                         <option value="<?php echo $rowJalan->id_jalan; ?>"><?php echo $rowJalan->nama_jalan; ?></option>
                                     <?php }?>
                                 </select>
+                                <select name="id_jalan" class="form-control id_jalan1"></select>
                             </div>
                         </div>
                     </div>
@@ -88,9 +92,14 @@
                         <div class="form-group">
                             <div class="input-group input-group-alternative mb-3">
                                 <div class="input-group-prepend">
-                                <span class="input-group-text"><i class="ni ni-button-pause"></i></span>
+                                <span class="input-group-text"><i class="ni ni-map-big"></i></span>
                                 </div>
-                                <input type="text" class="form-control" name="panjang" id="panjang" placeholder="Panjang Lubang">
+                                <select name="id_type" class="form-control">
+                                    <option value="">--Pilih Type Jalan--</option>
+                                    <?php foreach ($type as $rowType) {?>
+                                        <option value="<?php echo $rowType->id_type; ?>"><?php echo $rowType->type_jalan; ?></option>
+                                    <?php }?>
+                                </select>
                             </div>
                         </div>
                     </div>
@@ -98,9 +107,14 @@
                         <div class="form-group">
                             <div class="input-group input-group-alternative mb-3">
                                 <div class="input-group-prepend">
-                                <span class="input-group-text"><i class="ni ni-button-pause"></i></span>
+                                <span class="input-group-text"><i class="ni ni-atom"></i></span>
                                 </div>
-                                <input type="text" class="form-control" name="lebar" id="lebar" placeholder="Lebar Lubang">
+                                <select name="id_material" class="form-control">
+                                    <option value="">--Pilih Material Jalan--</option>
+                                    <?php foreach ($material as $rowMaterial) {?>
+                                        <option value="<?php echo $rowMaterial->id_material; ?>"><?php echo $rowMaterial->nama_material; ?></option>
+                                    <?php }?>
+                                </select>
                             </div>
                         </div>
                     </div>
@@ -110,7 +124,24 @@
                         <div class="form-group">
                             <div class="input-group input-group-alternative mb-3">
                                 <div class="input-group-prepend">
-                                <span class="input-group-text"><i class="ni ni-pin-3"></i></span>
+                                <span class="input-group-text"><i class="ni ni-chart-pie-35"></i></span>
+                                </div>
+                                <select name="id_kerusakan" class="form-control">
+                                    <option value="">--Pilih Kerusakan Jalan--</option>
+                                    <?php foreach ($kerusakan as $rowKerusakan) {?>
+                                        <option value="<?php echo $rowKerusakan->id_kerusakan; ?>"><?php echo $rowKerusakan->nama_kerusakan; ?></option>
+                                    <?php }?>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <div class="input-group input-group-alternative mb-3">
+                                <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="ni ni-square-pin"></i></span>
                                 </div>
                                 <input type="text" class="form-control" name="lat" id="lat" placeholder="Latitude">
                             </div>
@@ -120,7 +151,7 @@
                         <div class="form-group">
                             <div class="input-group input-group-alternative mb-3">
                                 <div class="input-group-prepend">
-                                <span class="input-group-text"><i class="ni ni-pin-3"></i></span>
+                                <span class="input-group-text"><i class="ni ni-square-pin"></i></span>
                                 </div>
                                 <input type="text" class="form-control" name="long" id="long" placeholder="Longitude">
                             </div>
@@ -130,7 +161,8 @@
                 <div class="text-center">
                   <button type="submit" class="btn btn-primary mt-4">Tambah Data</button>
                 </div>
-              </form>
+            </div>
+            </form>
           </div>
         </div>
       </div>
@@ -140,4 +172,31 @@
     </div>
 </body>
 <?php $this->load->view('_partials/js.php');?>
+<script>
+  $(document).ready(function(){
+    $(".id_jalan1").hide();
+    $(".id_wilayah").change(function(){ 
+      $(".id_jalan1").show();
+      $(".id_jalan2").hide();  
+      $.ajax({
+        type: "POST",
+        url: "<?php echo base_url("index.php/data/list_jalan"); ?>", 
+        data: {id_wilayah : $(".id_wilayah").val()}, 
+        dataType: "json",
+        beforeSend: function(e) {
+          if(e && e.overrideMimeType) {
+            e.overrideMimeType("application/json;charset=UTF-8");
+          }
+        },
+        success: function(response){
+          $(".id_jalan2").hide(); 
+          $(".id_jalan1").html(response.list_jalan).show();
+        },
+        error: function (xhr, ajaxOptions, thrownError) { 
+          alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError); 
+        }
+      });
+    });
+  });
+  </script> 
 </html>

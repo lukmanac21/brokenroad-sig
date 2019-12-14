@@ -28,10 +28,11 @@
                     <th scope="col">No</th>
                     <th scope="col">Wilayah</th>
                     <th scope="col">Arus Jalan</th>
-                    <th scope="col">Kondisi Jalan</th>
+                    <th scope="col">Nama Jalan</th>
                     <th scope="col">Keramaian Jalan</th>
-                    <th scope="col">Panjang</th>
-                    <th scope="col">Lebar</th>
+                    <th scope="col">Type Jalan</th>
+                    <th scope="col">Material Jalan</th>
+                    <th scope="col">Tingkat Kerusakan</th>
                     <th scope="col"></th>
                   </tr>
                 </thead>
@@ -44,8 +45,9 @@
                   <td><?php echo $resultMaps->nama_arus; ?></td>
                   <td><?php echo $resultMaps->nama_jalan; ?></td>
                   <td><?php echo $resultMaps->nama_keramaian; ?></td>
-                  <td><?php echo $resultMaps->panjang_lubang; ?></td>
-                  <td><?php echo $resultMaps->lebar_lubang; ?></td> 
+                  <td><?php echo $resultMaps->type_jalan; ?></td>
+                  <td><?php echo $resultMaps->nama_material; ?></td>
+                  <td><?php echo $resultMaps->nama_kerusakan; ?></td>  
                   <td class="text-right">
                       <div class="dropdown">
                         <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -58,7 +60,7 @@
                       </div>
                     </td>
                 </tbody>
-                <?php } ?>
+                <?php $i++; } ?>
               </table>
             </div>
           </div>

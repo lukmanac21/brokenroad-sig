@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 09, 2019 at 12:44 PM
+-- Generation Time: Dec 14, 2019 at 11:56 AM
 -- Server version: 10.3.16-MariaDB
 -- PHP Version: 7.3.6
 
@@ -40,7 +40,7 @@ CREATE TABLE `tbl_admin` (
 --
 
 INSERT INTO `tbl_admin` (`id_admin`, `email_admin`, `name_admin`, `pass_admin`) VALUES
-(3, 'lukmanarief@enddev,com', 'Lukman Arief', '21232f297a57a5a743894a0e4a801fc3');
+(3, 'lukmanarief@enddev.com', 'Lukman Arief', '21232f297a57a5a743894a0e4a801fc3');
 
 -- --------------------------------------------------------
 
@@ -69,17 +69,18 @@ INSERT INTO `tbl_arus` (`id_arus`, `nama_arus`) VALUES
 
 CREATE TABLE `tbl_jalan` (
   `id_jalan` int(11) NOT NULL,
-  `nama_jalan` varchar(50) NOT NULL
+  `id_wilayah` int(11) NOT NULL,
+  `nama_jalan` varchar(50) NOT NULL,
+  `panjang_jalan` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_jalan`
 --
 
-INSERT INTO `tbl_jalan` (`id_jalan`, `nama_jalan`) VALUES
-(1, 'Aspal'),
-(2, 'Batuan'),
-(3, 'Tanah');
+INSERT INTO `tbl_jalan` (`id_jalan`, `id_wilayah`, `nama_jalan`, `panjang_jalan`) VALUES
+(1, 4, 'Jalan Mt Haryono', '2 Km'),
+(2, 5, 'Jalan Raya Tidar', '3 Km');
 
 -- --------------------------------------------------------
 
@@ -104,6 +105,26 @@ INSERT INTO `tbl_keramaian` (`id_keramaian`, `nama_keramaian`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `tbl_kerusakan`
+--
+
+CREATE TABLE `tbl_kerusakan` (
+  `id_kerusakan` int(11) NOT NULL,
+  `nama_kerusakan` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tbl_kerusakan`
+--
+
+INSERT INTO `tbl_kerusakan` (`id_kerusakan`, `nama_kerusakan`) VALUES
+(1, 'Sedang'),
+(2, 'Medium'),
+(3, 'Parah');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `tbl_maps`
 --
 
@@ -113,8 +134,9 @@ CREATE TABLE `tbl_maps` (
   `id_arus` int(11) NOT NULL,
   `id_jalan` int(11) NOT NULL,
   `id_keramaian` int(11) NOT NULL,
-  `panjang_lubang` varchar(50) NOT NULL,
-  `lebar_lubang` varchar(50) NOT NULL,
+  `id_type` int(11) NOT NULL,
+  `id_material` int(11) NOT NULL,
+  `id_kerusakan` int(11) NOT NULL,
   `lattitude` varchar(100) NOT NULL,
   `longitude` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -123,10 +145,52 @@ CREATE TABLE `tbl_maps` (
 -- Dumping data for table `tbl_maps`
 --
 
-INSERT INTO `tbl_maps` (`id_maps`, `id_wilayah`, `id_arus`, `id_jalan`, `id_keramaian`, `panjang_lubang`, `lebar_lubang`, `lattitude`, `longitude`) VALUES
-(1, 1, 1, 1, 2, '90 Cm', '30 Cm', '-6.161432', '106.737876'),
-(2, 1, 1, 2, 1, '90 Cm', '30 Cm', '-6.161833', '106.737976'),
-(3, 1, 1, 2, 1, '90 Cm', '35 Cm', '-6.161833', '106.737976');
+INSERT INTO `tbl_maps` (`id_maps`, `id_wilayah`, `id_arus`, `id_jalan`, `id_keramaian`, `id_type`, `id_material`, `id_kerusakan`, `lattitude`, `longitude`) VALUES
+(1, 1, 1, 1, 2, 1, 1, 2, '-6.161432', '106.737876'),
+(2, 1, 1, 2, 1, 1, 1, 2, '-6.161833', '106.737976'),
+(3, 1, 1, 2, 1, 2, 1, 1, '-6.161833', '106.737976');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_material`
+--
+
+CREATE TABLE `tbl_material` (
+  `id_material` int(11) NOT NULL,
+  `nama_material` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tbl_material`
+--
+
+INSERT INTO `tbl_material` (`id_material`, `nama_material`) VALUES
+(1, 'Aspal'),
+(2, 'Tanah'),
+(3, 'Batuan');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_type`
+--
+
+CREATE TABLE `tbl_type` (
+  `id_type` int(11) NOT NULL,
+  `type_jalan` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tbl_type`
+--
+
+INSERT INTO `tbl_type` (`id_type`, `type_jalan`) VALUES
+(1, 'Jalan Nasional'),
+(2, 'Jalan Kabupaten'),
+(3, 'Jalan Provinsi'),
+(4, 'Jalan Kota'),
+(5, 'Jalan Desa');
 
 -- --------------------------------------------------------
 
@@ -179,10 +243,28 @@ ALTER TABLE `tbl_keramaian`
   ADD PRIMARY KEY (`id_keramaian`);
 
 --
+-- Indexes for table `tbl_kerusakan`
+--
+ALTER TABLE `tbl_kerusakan`
+  ADD PRIMARY KEY (`id_kerusakan`);
+
+--
 -- Indexes for table `tbl_maps`
 --
 ALTER TABLE `tbl_maps`
   ADD PRIMARY KEY (`id_maps`);
+
+--
+-- Indexes for table `tbl_material`
+--
+ALTER TABLE `tbl_material`
+  ADD PRIMARY KEY (`id_material`);
+
+--
+-- Indexes for table `tbl_type`
+--
+ALTER TABLE `tbl_type`
+  ADD PRIMARY KEY (`id_type`);
 
 --
 -- Indexes for table `tbl_wilayah`
@@ -210,7 +292,7 @@ ALTER TABLE `tbl_arus`
 -- AUTO_INCREMENT for table `tbl_jalan`
 --
 ALTER TABLE `tbl_jalan`
-  MODIFY `id_jalan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_jalan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `tbl_keramaian`
@@ -219,10 +301,28 @@ ALTER TABLE `tbl_keramaian`
   MODIFY `id_keramaian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
+-- AUTO_INCREMENT for table `tbl_kerusakan`
+--
+ALTER TABLE `tbl_kerusakan`
+  MODIFY `id_kerusakan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT for table `tbl_maps`
 --
 ALTER TABLE `tbl_maps`
   MODIFY `id_maps` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `tbl_material`
+--
+ALTER TABLE `tbl_material`
+  MODIFY `id_material` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `tbl_type`
+--
+ALTER TABLE `tbl_type`
+  MODIFY `id_type` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `tbl_wilayah`

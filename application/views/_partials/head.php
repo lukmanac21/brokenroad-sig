@@ -1,6 +1,6 @@
-<head>
+
 <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no, shrink-to-fit=no">
   <title>
     Admin - Sistem Informasi Geografis
   </title>
@@ -13,4 +13,7 @@
   <link href="<?php echo base_url();?>assets/js/plugins/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet" />
   <!-- CSS Files -->
   <link href="<?php echo base_url();?>assets/css/argon-dashboard.css?v=1.1.0" rel="stylesheet" />
-</head>
+  <!-----  mengaktifkan Leaflet  ------>
+	<link rel="stylesheet" href="<?php echo base_url();?>assets/leaflet/dist/leaflet.css" />
+	<link href="<?php echo base_url();?>assets/css/bootstrap.css" rel="stylesheet">
+  <link href="<?php echo base_url();?>assets/css/leaflet/dist/leaflet.css" rel="stylesheet">
